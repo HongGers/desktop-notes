@@ -10,6 +10,7 @@ using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Provider;
 using System.Windows.Input;
 
 namespace desktop_notes.ViewModel
@@ -30,6 +31,7 @@ namespace desktop_notes.ViewModel
 
             //initialize commands
             AddNoteCommand = new RelayCommand(AddNote);
+            OpenNoteCommand = new RelayCommand(OpenNote);
         }
         #endregion
 
@@ -63,20 +65,52 @@ namespace desktop_notes.ViewModel
 
         //---command---
         public ICommand AddNoteCommand { get; }
+        public ICommand OpenNoteCommand { get; }
         #endregion
 
 
         #region Private Method
         void AddNote(object? param)
         {
-            var addNoteDialog = new AddStickyNoteDialog();
-            addNoteDialog.DataContext = new StickyNote();
-
-            bool? dialogResult = addNoteDialog.ShowDialog();
-            if (dialogResult.HasValue && dialogResult.Value)
+            try
             {
-                StickyNote newNote = (StickyNote)addNoteDialog.DataContext;
-                this.StickyNotes.Add(newNote);
+                MainWindow? mainWindow = param as MainWindow;
+                if (mainWindow == null) throw new ArgumentException("AddNoteCommand should called with MainWindow passed in as parameter");
+
+                var addNoteDialog = new AddStickyNoteDialog();
+                addNoteDialog.DataContext = new StickyNote();
+
+                mainWindow.Hide();
+                bool? dialogResult = addNoteDialog.ShowDialog();
+                if (dialogResult.HasValue && dialogResult.Value)
+                {
+                    StickyNote newNote = (StickyNote)addNoteDialog.DataContext;
+                    this.StickyNotes.Add(newNote);
+                }
+                mainWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        void OpenNote(object? param)
+        {
+            try
+            {
+                StickyNote? noteToOpen = param as StickyNote;
+                if (noteToOpen == null) throw new ArgumentException("OpenNoteCommand should be called with a StickyNote passed in as parameter");
+
+                var noteWindow = new NoteWindow();
+                var viewModel = new NoteWindowViewModel(noteToOpen);
+                noteWindow.DataContext = viewModel;
+
+                noteWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion

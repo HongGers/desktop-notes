@@ -18,14 +18,19 @@ namespace desktop_notes
     {
         private void OnStartUp(object sender, StartupEventArgs e)
         {
-            MainWindow startupWindow = new MainWindow();
-            MainWindowViewModel mainWindowViewModel = MainWindowViewModel.GlobalViewModel;
-            mainWindowViewModel.Title = "Desktop Sticky Notes";
-            mainWindowViewModel.StickyNotes.Add(new StickyNote("Buy Egg", "remember to buy egg tonight"));
-            mainWindowViewModel.StickyNotes.Add(new StickyNote("Pay Deposit", "pay for ring DIY deposit. account : ..."));
+            try
+            {
+                MainWindow startupWindow = new MainWindow();
+                MainWindowViewModel mainWindowViewModel = MainWindowViewModel.GlobalViewModel;
+                mainWindowViewModel.Title = "Desktop Sticky Notes";
 
-            startupWindow.DataContext = mainWindowViewModel;
-            startupWindow.Show();
+                startupWindow.DataContext = mainWindowViewModel;
+                startupWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }
