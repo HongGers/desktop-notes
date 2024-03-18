@@ -18,9 +18,9 @@ namespace desktop_notes.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         #region Singleton member
-        public static MainWindowViewModel GlobalViewModel { get => _viewModel; }
+        public static MainWindowViewModel GlobalViewModel { get => _instance; }
 
-        private static MainWindowViewModel _viewModel = new();
+        private static MainWindowViewModel _instance = new();
         #endregion
 
 

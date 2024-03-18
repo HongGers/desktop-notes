@@ -20,11 +20,12 @@ namespace desktop_notes
         {
             try
             {
+                //prepare MainWindow and MainWindowViewModel
                 MainWindow startupWindow = new MainWindow();
                 MainWindowViewModel mainWindowViewModel = MainWindowViewModel.GlobalViewModel;
                 mainWindowViewModel.Title = "Desktop Sticky Notes";
-
                 startupWindow.DataContext = mainWindowViewModel;
+
                 startupWindow.Show();
             }
             catch (Exception ex)
