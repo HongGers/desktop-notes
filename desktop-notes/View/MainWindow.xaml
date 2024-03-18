@@ -29,7 +29,7 @@
                    HorizontalAlignment="Center" Margin="10" />
 
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Button Content="add" Command="{Binding AddNoteCommand}" CommandParameter="{Binding ElementName=MainWindowElement}"/>
+                <Button Content="add" Click="HandleAddClicked"/>
                 <Button Content="open" Command="{Binding OpenNoteCommand}" CommandParameter="{Binding ElementName=NotesList,Path=SelectedItem}"/>
             </StackPanel>
 

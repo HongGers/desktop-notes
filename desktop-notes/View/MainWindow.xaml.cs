@@ -36,6 +36,30 @@ namespace desktop_notes.View
         {
             if (e.ChangedButton == MouseButton.Left) DragMove();
         }
+
+        private void HandleAddClicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var addNoteDialog = new AddNoteWindow();
+                bool? dialogResult = addNoteDialog.ShowDialog();
+                if (dialogResult.HasValue && dialogResult.Value)
+                {
+                    AddNoteWindowViewModel vm = (AddNoteWindowViewModel)addNoteDialog.DataContext;
+                    StickyNote addedNote = vm.Note;
+
+                    MainWindowViewModel? mainWindowVM = this.DataContext as MainWindowViewModel;
+                    if (mainWindowVM != null)
+                    {
+                        mainWindowVM.AddNote(addedNote);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         #endregion
     }
 }

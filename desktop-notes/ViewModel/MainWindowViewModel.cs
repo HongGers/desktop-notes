@@ -30,7 +30,7 @@ namespace desktop_notes.ViewModel
             _stickyNotes.CollectionChanged += (s, e) => OnPropertyChanged(nameof(StickyNotes));
 
             //initialize commands
-            AddNoteCommand = new RelayCommand(AddNote);
+            AddNoteCommand = new RelayCommand(AddNote,(noteToAdd) => noteToAdd is StickyNote);
             OpenNoteCommand = new RelayCommand(OpenNote);
         }
         #endregion
@@ -69,25 +69,15 @@ namespace desktop_notes.ViewModel
         #endregion
 
 
-        #region Private Method
-        void AddNote(object? param)
+        #region Command Method
+        public void AddNote(object? param)
         {
             try
             {
-                MainWindow? mainWindow = param as MainWindow;
-                if (mainWindow == null) throw new ArgumentException("AddNoteCommand should called with MainWindow passed in as parameter");
+                StickyNote? noteToAdd = param as StickyNote;
+                if (noteToAdd == null) throw new ArgumentException("AddNoteCommand should be called with a StickyNote passed in as parameter.");
 
-                var addNoteDialog = new AddStickyNoteDialog();
-                addNoteDialog.DataContext = new StickyNote();
-
-                mainWindow.Hide();
-                bool? dialogResult = addNoteDialog.ShowDialog();
-                if (dialogResult.HasValue && dialogResult.Value)
-                {
-                    StickyNote newNote = (StickyNote)addNoteDialog.DataContext;
-                    this.StickyNotes.Add(newNote);
-                }
-                mainWindow.Show();
+                this.StickyNotes.Add(noteToAdd);
             }
             catch (Exception ex)
             {
@@ -95,7 +85,7 @@ namespace desktop_notes.ViewModel
             }
         }
 
-        void OpenNote(object? param)
+        public void OpenNote(object? param)
         {
             try
             {

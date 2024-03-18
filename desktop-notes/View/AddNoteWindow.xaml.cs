@@ -18,9 +18,9 @@ namespace desktop_notes.View
     /// <summary>
     /// Interaction logic for AddStickyNoteDialog.xaml
     /// </summary>
-    public partial class AddStickyNoteDialog : Window
+    public partial class AddNoteWindow : Window
     {
-        public AddStickyNoteDialog()
+        public AddNoteWindow()
         {
             InitializeComponent();
         }
