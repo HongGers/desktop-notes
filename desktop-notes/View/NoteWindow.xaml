@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="NoteWindow" Height="450" Width="800"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        SizeToContent="WidthAndHeight" Topmost="True">
+        SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="NoResize">
     <Window.DataContext>
         <viewModel:NoteWindowViewModel Title="Title" TextContent="Content" />
     </Window.DataContext>

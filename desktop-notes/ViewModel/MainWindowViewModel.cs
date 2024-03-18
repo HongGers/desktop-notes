@@ -30,8 +30,7 @@ namespace desktop_notes.ViewModel
             _stickyNotes.CollectionChanged += (s, e) => OnPropertyChanged(nameof(StickyNotes));
 
             //initialize commands
-            AddNoteCommand = new RelayCommand(AddNote,(noteToAdd) => noteToAdd is StickyNote);
-            OpenNoteCommand = new RelayCommand(OpenNote);
+            AddNoteCommand = new RelayCommand(AddNote, (noteToAdd) => noteToAdd is StickyNote);
         }
         #endregion
 
@@ -65,7 +64,6 @@ namespace desktop_notes.ViewModel
 
         //---command---
         public ICommand AddNoteCommand { get; }
-        public ICommand OpenNoteCommand { get; }
         #endregion
 
 
@@ -82,25 +80,6 @@ namespace desktop_notes.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-
-        public void OpenNote(object? param)
-        {
-            try
-            {
-                StickyNote? noteToOpen = param as StickyNote;
-                if (noteToOpen == null) throw new ArgumentException("OpenNoteCommand should be called with a StickyNote passed in as parameter");
-
-                var noteWindow = new NoteWindow();
-                var viewModel = new NoteWindowViewModel(noteToOpen);
-                noteWindow.DataContext = viewModel;
-
-                noteWindow.Show();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion

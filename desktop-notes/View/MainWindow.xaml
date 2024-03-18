@@ -30,7 +30,7 @@
 
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Content="add" Click="HandleAddClicked"/>
-                <Button Content="open" Command="{Binding OpenNoteCommand}" CommandParameter="{Binding ElementName=NotesList,Path=SelectedItem}"/>
+                <Button Content="open" Click="HandleOpenClicked"/>
             </StackPanel>
 
             <ListView Grid.Row="2" x:Name="NotesList" ItemsSource="{Binding StickyNotes}" 

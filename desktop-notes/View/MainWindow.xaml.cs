@@ -60,6 +60,24 @@ namespace desktop_notes.View
                 MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void HandleOpenClicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                StickyNote selectedNote = (StickyNote)NotesList.SelectedItem;
+
+                var noteWindow = new NoteWindow()
+                {
+                    DataContext = new NoteWindowViewModel(selectedNote)
+                };
+                noteWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
         #endregion
     }
 }
