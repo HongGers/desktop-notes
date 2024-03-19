@@ -3,8 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:desktop_notes"
              Startup="OnStartUp">
-    
+
     <Application.Resources>
-        <ResourceDictionary Source="pack://application:,,,/desktop-notes;component/Style/StyleBase.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/desktop-notes;component/Style/StyleBase.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/desktop-notes;component/Style/ImageSources.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
