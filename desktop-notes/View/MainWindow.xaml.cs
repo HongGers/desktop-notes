@@ -65,6 +65,7 @@ namespace desktop_notes.View
         {
             try
             {
+                if (NotesList.SelectedItem == null) return;
                 StickyNote selectedNote = (StickyNote)NotesList.SelectedItem;
 
                 var noteWindow = new NoteWindow()
