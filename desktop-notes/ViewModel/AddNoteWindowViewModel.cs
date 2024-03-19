@@ -1,4 +1,5 @@
 ﻿using desktop_notes.Model;
+using desktop_notes.View;
 using desktop_notes.Util;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,15 @@ using System.Windows.Input;
 
 namespace desktop_notes.ViewModel
 {
+    /// <summary>
+    /// View Model for <see cref="AddNoteWindow"/>
+    /// </summary>
     public class AddNoteWindowViewModel : ViewModelBase
     {
         #region Constructor
+        /// <summary>
+        /// Default constructor of AddNoteWindowViewModel
+        /// </summary>
         public AddNoteWindowViewModel()
         {
             _note = new StickyNote();
@@ -21,11 +28,17 @@ namespace desktop_notes.ViewModel
 
 
         #region Field
+        /// <summary>
+        /// <see cref="StickyNote"/> shown by this window
+        /// </summary>
         StickyNote _note;
         #endregion
 
 
         #region Property
+        /// <summary>
+        /// Get/Set the <see cref="StickyNote.Title">Title</see> of <see cref="StickyNote"/>
+        /// </summary>
         public string Title
         {
             get => _note.Title;
@@ -35,6 +48,9 @@ namespace desktop_notes.ViewModel
                 OnPropertyChanged(nameof(Title));
             }
         }
+        /// <summary>
+        /// Get/Set the <see cref="StickyNote.TExtContet"/> of <see cref="StickyNote"/>
+        /// </summary>
         public string TextContent
         {
             get => _note.TextContent;
@@ -44,6 +60,9 @@ namespace desktop_notes.ViewModel
                 OnPropertyChanged(nameof(TextContent));
             }
         }
+        /// <summary>
+        /// Access the <see cref="StickyNote"/> shown by this window
+        /// </summary>
         public StickyNote Note { get => _note; }
         #endregion
     }

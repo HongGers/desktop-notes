@@ -15,9 +15,15 @@ using System.Windows.Input;
 
 namespace desktop_notes.ViewModel
 {
+    /// <summary>
+    /// View Model for <see cref="MainWindow"/>
+    /// </summary>
     public class MainWindowViewModel : ViewModelBase
     {
         #region Singleton member
+        /// <summary>
+        /// Access global view model of <see cref="MainWindow"/>
+        /// </summary>
         public static MainWindowViewModel GlobalViewModel { get => _instance; }
 
         private static MainWindowViewModel _instance = new();
@@ -45,6 +51,9 @@ namespace desktop_notes.ViewModel
 
         #region Property
         //---data---
+        /// <summary>
+        /// Get/Set the Title of MainWindow
+        /// </summary>
         public string Title
         {
             get => _title;
@@ -54,6 +63,9 @@ namespace desktop_notes.ViewModel
                 OnPropertyChanged(nameof(Title));
             }
         }
+        /// <summary>
+        /// Access the StickyNote collection of MainWindow
+        /// </summary>
         public ObservableCollection<StickyNote> StickyNotes
         {
             get => _stickyNotes;
@@ -65,8 +77,20 @@ namespace desktop_notes.ViewModel
         }
 
         //---command---
+        /// <summary>
+        /// Command to add a new StickyNote
+        /// <para>* should call with a <see cref="StickyNote"/> pass in as CommandParameter</para>
+        /// </summary>
         public ICommand AddNoteCommand { get; }
+        /// <summary>
+        /// Command to show MainWindow
+        /// <para>* should call with a <see cref="MainWindow"/> to show pass in as CommandParameter</para>
+        /// </summary>
         public ICommand ShowWindowCommand { get; }
+        /// <summary>
+        /// Command to hide MainWindow
+        /// <para>* should call with a <see cref="MainWindow"/> to hide pass in as CommandParameter</para>
+        /// </summary>
         public ICommand HideWindowCommand { get; }
         #endregion
 

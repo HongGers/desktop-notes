@@ -11,11 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using desktop_notes.Model;
 
 namespace desktop_notes.View
 {
     /// <summary>
-    /// Interaction logic for NoteWindow.xaml
+    /// Window to display a <see cref="StickyNote"/>
     /// </summary>
     public partial class NoteWindow : Window
     {

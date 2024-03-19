@@ -19,7 +19,7 @@ using System.Windows.Shapes;
 namespace desktop_notes.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Main window of appliaction
     /// </summary>
     public partial class MainWindow : Window
     {
