@@ -34,17 +34,19 @@
 
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Content="add" Click="HandleAddClicked"/>
-                <Button Content="open" Click="HandleOpenClicked"/>
             </StackPanel>
 
             <ListView Grid.Row="2" x:Name="NotesList" ItemsSource="{Binding StickyNotes}" 
                       Background="Transparent" BorderThickness="0">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Title}" FontSize="{StaticResource NormalFontSize}"/>
-                            <TextBlock Text="{Binding TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"/>
-                        </StackPanel>
+                        <DockPanel>
+                            <Button DockPanel.Dock="Right" Content="open" Click="HandleOpenNoteClicked" Tag="{Binding}"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Title}" FontSize="{StaticResource NormalFontSize}"/>
+                                <TextBlock Text="{Binding TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"/>
+                            </StackPanel>
+                        </DockPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

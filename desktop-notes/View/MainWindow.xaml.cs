@@ -61,17 +61,17 @@ namespace desktop_notes.View
             }
         }
 
-        private void HandleOpenClicked(object sender, RoutedEventArgs e)
+        private void HandleOpenNoteClicked(object sender, RoutedEventArgs e)
         {
             try
             {
-                if (NotesList.SelectedItem == null) return;
-                StickyNote selectedNote = (StickyNote)NotesList.SelectedItem;
+                Button activeBtn = (Button)sender;
+                StickyNote selectedNote = (StickyNote)activeBtn.Tag;
 
-                var noteWindow = new NoteWindow()
-                {
-                    DataContext = new NoteWindowViewModel(selectedNote)
-                };
+                var noteWindow = new NoteWindow();
+                var noteWindowVM = new NoteWindowViewModel(selectedNote);
+                noteWindow.DataContext = noteWindowVM;
+
                 noteWindow.Show();
             }
             catch (Exception ex)
