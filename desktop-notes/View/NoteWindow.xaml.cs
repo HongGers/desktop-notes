@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using desktop_notes.Model;
+using desktop_notes.ViewModel;
 
 namespace desktop_notes.View
 {
@@ -27,7 +28,8 @@ namespace desktop_notes.View
 
         private void HandleDrag(object sender, MouseButtonEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left) DragMove();
+            NoteWindowViewModel viewModel = (NoteWindowViewModel)DataContext;
+            if (!viewModel.IsFixed && e.ChangedButton == MouseButton.Left) DragMove();
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using desktop_notes.Model;
+using desktop_notes.Util;
 using desktop_notes.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace desktop_notes.ViewModel
 {
@@ -20,6 +22,8 @@ namespace desktop_notes.ViewModel
         public NoteWindowViewModel()
         {
             _note = new StickyNote();
+
+            InitCommands();
         }
 
         /// <summary>
@@ -29,6 +33,13 @@ namespace desktop_notes.ViewModel
         public NoteWindowViewModel(StickyNote note)
         {
             _note = note;
+
+            InitCommands();
+        }
+
+        private void InitCommands()
+        {
+            ToggleFixedCommand = new RelayCommand(ToggleFixed);
         }
         #endregion
 
@@ -38,6 +49,8 @@ namespace desktop_notes.ViewModel
         /// private member of <see cref="StickyNote"/> shown by this window
         /// </summary>
         StickyNote _note;
+        bool _isFixed = false;
+        double _opacity = 1;
         #endregion
 
 
@@ -70,6 +83,44 @@ namespace desktop_notes.ViewModel
         /// Access the <see cref="StickyNote"/> shown by this window
         /// </summary>
         public StickyNote Note { get => _note; }
+        /// <summary>
+        /// Get/Set whether the note window is fixed
+        /// </summary>
+        public bool IsFixed
+        {
+            get => _isFixed;
+            set
+            {
+                _isFixed = value;
+                OnPropertyChanged(nameof(IsFixed));
+            }
+        }
+        /// <summary>
+        /// Get/Set the Opacity of note window
+        /// <para>* Opacity should be in range 0~1</para>
+        /// </summary>
+        public double Opacity
+        {
+            get => _opacity;
+            set
+            {
+                _opacity = value;
+                OnPropertyChanged(nameof(Opacity));
+            }
+        }
+
+        /// <summary>
+        /// Command to toggle <see cref="IsFixed">IsFixed</see> property of NoteWindowViewModel
+        /// </summary>
+        public ICommand ToggleFixedCommand { get; private set; }
+        #endregion
+
+
+        #region Command Method
+        void ToggleFixed(object? param)
+        {
+            IsFixed = !IsFixed;
+        }
         #endregion
     }
 }

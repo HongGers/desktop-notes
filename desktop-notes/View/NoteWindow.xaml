@@ -9,25 +9,52 @@
         mc:Ignorable="d"
         Title="NoteWindow" Height="450" Width="800"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="NoResize">
+        SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="NoResize"
+        x:Name="NoteWindowElement">
     <Window.DataContext>
         <viewModel:NoteWindowViewModel Title="Title" TextContent="Content" />
     </Window.DataContext>
 
-    <Border Margin="0" MouseDown="HandleDrag" MinWidth="120" MinHeight="100">
+    <Border Margin="0" MouseDown="HandleDrag" MinWidth="120" MinHeight="100"
+            Opacity="{Binding Opacity}">
         <Border.Background>
             <SolidColorBrush Color="{StaticResource Yellow}"/>
         </Border.Background>
-        <Grid Margin="20" HorizontalAlignment="Center">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+        <Grid Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-            <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="{StaticResource NormalFontSize}"
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="{StaticResource NormalFontSize}"
                        Margin="0 5"/>
-            <TextBlock Grid.Row="1" Text="{Binding TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"
+                <TextBlock Grid.Row="1" Text="{Binding TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"
                        Margin="0 5"/>
+            </Grid>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical">
+                <Button Command="{Binding ToggleFixedCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin" Value="0 0 0 10"/>
+                            <Setter Property="Content" Value="X"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=NoteWindowElement,Path=DataContext.(viewModel:NoteWindowViewModel.IsFixed)}" Value="False">
+                                    <Setter Property="Content" Value="O"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <Slider Height="100" Orientation="Vertical" VerticalAlignment="Bottom" Value="{Binding Opacity,Mode=TwoWay}"
+                    Maximum="1" Minimum="0.2" />
+            </StackPanel>
         </Grid>
     </Border>
 </Window>

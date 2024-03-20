@@ -26,8 +26,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <tb:TaskbarIcon ToolTipText="Hello World" IconSource="{StaticResource NoteIcon}" 
-                            LeftClickCommand="{Binding HideWindowCommand}" LeftClickCommandParameter="{Binding ElementName=MainWindowElement}"
-            DoubleClickCommand="{Binding ShowWindowCommand}" DoubleClickCommandParameter="{Binding ElementName=MainWindowElement}"/>
+                            DoubleClickCommand="{Binding ShowWindowCommand}" DoubleClickCommandParameter="{Binding ElementName=MainWindowElement}" />
 
             <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="{StaticResource LargeFontSize}"
                    HorizontalAlignment="Center" Margin="10" />
