@@ -79,6 +79,26 @@ namespace desktop_notes.View
                 MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void HandleShowWindow(object sender, RoutedEventArgs e)
+        {
+            Show();
+            Activate();
+        }
+
+        private void HandleHideWindow(object sender, RoutedEventArgs e) => Hide();
         #endregion
+
+        private void HandleWindowClosed(object sender, EventArgs e)
+        {
+            try
+            {
+                TrayIcon.Visibility = Visibility.Hidden;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
     }
 }

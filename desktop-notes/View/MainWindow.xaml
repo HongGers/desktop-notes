@@ -12,7 +12,9 @@
         TextElement.FontFamily="{StaticResource FontFamily}"
         TextElement.FontSize="{StaticResource NormalFontSize}"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
-        x:Name="MainWindowElement" ShowInTaskbar="False">
+        x:Name="MainWindowElement" ShowInTaskbar="False"
+        Closed="HandleWindowClosed" ResizeMode="CanResizeWithGrip"
+        MinWidth="300" MinHeight="300">
 
     <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" MouseDown="HandleDrag">
         <Border.Background>
@@ -25,9 +27,10 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <tb:TaskbarIcon ToolTipText="Hello World" IconSource="{StaticResource NoteIcon}" 
-                            DoubleClickCommand="{Binding ShowWindowCommand}" DoubleClickCommandParameter="{Binding ElementName=MainWindowElement}" />
+            <tb:TaskbarIcon x:Name="TrayIcon" ToolTipText="Hello World" IconSource="{StaticResource NoteIcon}"
+                            TrayMouseDoubleClick="HandleShowWindow"/>
 
+            <Button Grid.Row="0" HorizontalAlignment="Right" Content="hide" DockPanel.Dock="Right" Click="HandleHideWindow"/>
             <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="{StaticResource LargeFontSize}"
                    HorizontalAlignment="Center" Margin="10" />
 
@@ -36,7 +39,7 @@
             </StackPanel>
 
             <ListView Grid.Row="2" x:Name="NotesList" ItemsSource="{Binding StickyNotes}" 
-                      Background="Transparent" BorderThickness="0">
+                      Background="Transparent" BorderThickness="0" VirtualizingPanel.ScrollUnit="Pixel">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <DockPanel>

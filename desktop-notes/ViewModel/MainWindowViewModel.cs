@@ -37,8 +37,6 @@ namespace desktop_notes.ViewModel
 
             //initialize commands
             AddNoteCommand = new RelayCommand(AddNote, (noteToAdd) => noteToAdd is StickyNote);
-            ShowWindowCommand = new RelayCommand(ShowWindow, (param) => param is MainWindow);
-            HideWindowCommand = new RelayCommand(HideWindow, (param) => param is MainWindow);
         }
         #endregion
 
@@ -82,16 +80,6 @@ namespace desktop_notes.ViewModel
         /// <para>* should call with a <see cref="StickyNote"/> pass in as CommandParameter</para>
         /// </summary>
         public ICommand AddNoteCommand { get; }
-        /// <summary>
-        /// Command to show MainWindow
-        /// <para>* should call with a <see cref="MainWindow"/> to show pass in as CommandParameter</para>
-        /// </summary>
-        public ICommand ShowWindowCommand { get; }
-        /// <summary>
-        /// Command to hide MainWindow
-        /// <para>* should call with a <see cref="MainWindow"/> to hide pass in as CommandParameter</para>
-        /// </summary>
-        public ICommand HideWindowCommand { get; }
         #endregion
 
 
@@ -108,23 +96,6 @@ namespace desktop_notes.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        public void ShowWindow(object? param)
-        {
-            MainWindow? window = param as MainWindow;
-            if (window != null)
-            {
-                window.Show();
-                window.Activate();
-            }
-        }
-        public void HideWindow(object? param)
-        {
-            MainWindow? window = param as MainWindow;
-            if (window != null)
-            {
-                window.Hide();
             }
         }
         #endregion
