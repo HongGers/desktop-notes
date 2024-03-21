@@ -44,7 +44,7 @@ namespace desktop_notes.ViewModel
 
         #region Field
         string? _title;
-        ObservableCollection<StickyNote> _stickyNotes = new();
+        ObservableCollection<NoteListItemViewModel> _stickyNotes = new();
         #endregion
 
 
@@ -65,25 +65,17 @@ namespace desktop_notes.ViewModel
         /// <summary>
         /// Access the StickyNote collection of MainWindow
         /// </summary>
-        public ObservableCollection<StickyNote> StickyNotes
-        {
-            get => _stickyNotes;
-            set
-            {
-                _stickyNotes = value;
-                OnPropertyChanged(nameof(StickyNotes));
-            }
-        }
+        public ObservableCollection<NoteListItemViewModel> StickyNotes { get => _stickyNotes; }
 
         //---command---
         /// <summary>
-        /// Command to add a new StickyNote
+        /// Command to add a new sticky note
         /// <para>* should call with a <see cref="StickyNote"/> pass in as CommandParameter</para>
         /// </summary>
         public ICommand AddNoteCommand { get; }
         /// <summary>
-        /// Command to remove a <see cref="StickyNote"/> from MainWindow
-        /// <para>* should call with a <see cref="StickyNote"/> pass in as CommandParameter</para>
+        /// Command to remove a sticky note from MainWindow
+        /// <para>* should call with a <see cref="NoteListItemViewModel"/> pass in as CommandParameter</para>
         /// </summary>
         public ICommand RemoveNoteCommand { get; }
         #endregion
@@ -97,7 +89,8 @@ namespace desktop_notes.ViewModel
                 StickyNote? noteToAdd = param as StickyNote;
                 if (noteToAdd == null) throw new ArgumentException("AddNoteCommand should be called with a StickyNote passed in as parameter.");
 
-                this.StickyNotes.Add(noteToAdd);
+                var noteListItem = new NoteListItemViewModel(noteToAdd);
+                this.StickyNotes.Add(noteListItem);
             }
             catch (Exception ex)
             {
@@ -108,8 +101,8 @@ namespace desktop_notes.ViewModel
         {
             try
             {
-                StickyNote? noteToRemove = param as StickyNote;
-                if (noteToRemove == null) throw new ArgumentException("RemoveNoteCommand should be called with a StickyNote passed in as parameter.");
+                NoteListItemViewModel? noteToRemove = param as NoteListItemViewModel;
+                if (noteToRemove == null) throw new ArgumentException("RemoveNoteCommand should be called with a NoteListItemViewModel passed in as parameter.");
 
                 StickyNotes.Remove(noteToRemove);
             }

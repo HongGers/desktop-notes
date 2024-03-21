@@ -10,7 +10,7 @@
         Title="NoteWindow" Height="450" Width="800"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         SizeToContent="WidthAndHeight" Topmost="True" ResizeMode="CanResizeWithGrip"
-        ShowInTaskbar="False" x:Name="NoteWindowElement" Closed="HandleOnClose">
+        ShowInTaskbar="False" x:Name="NoteWindowElement">
     <Window.DataContext>
         <viewModel:NoteWindowViewModel Title="Title" TextContent="Content" />
     </Window.DataContext>

@@ -66,11 +66,15 @@ namespace desktop_notes.View
             try
             {
                 Button activeBtn = (Button)sender;
-                StickyNote selectedNote = (StickyNote)activeBtn.Tag;
+                var selectedNoteItem = (NoteListItemViewModel)activeBtn.Tag;
 
+                //prepare note window to open
                 var noteWindow = new NoteWindow();
-                var noteWindowVM = new NoteWindowViewModel(selectedNote);
+                var noteWindowVM = new NoteWindowViewModel(selectedNoteItem.Note);
                 noteWindow.DataContext = noteWindowVM;
+
+                //store noteWindow in note list item
+                selectedNoteItem.Window = noteWindow;
 
                 noteWindow.Show();
             }
@@ -85,10 +89,10 @@ namespace desktop_notes.View
             try
             {
                 Button activeBtn = (Button)sender;
-                StickyNote selectedNote = (StickyNote)activeBtn.Tag;
+                var selectedNoteItem = (NoteListItemViewModel)activeBtn.Tag;
 
                 var viewModel = (MainWindowViewModel)DataContext;
-                viewModel.RemoveNote(selectedNote);
+                viewModel.RemoveNote(selectedNoteItem);
             }
             catch (Exception ex)
             {

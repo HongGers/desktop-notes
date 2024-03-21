@@ -49,8 +49,8 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="{Binding Title}" FontSize="{StaticResource NormalFontSize}"/>
-                                <TextBlock Text="{Binding TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"/>
+                                <TextBlock Text="{Binding Note.Title}" FontSize="{StaticResource NormalFontSize}"/>
+                                <TextBlock Text="{Binding Note.TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Vertical">
                                 <Button DockPanel.Dock="Right" Content="open" Click="HandleOpenNoteClicked" Tag="{Binding}"/>
