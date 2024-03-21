@@ -31,5 +31,6 @@ namespace desktop_notes.View
             NoteWindowViewModel viewModel = (NoteWindowViewModel)DataContext;
             if (!viewModel.IsFixed && e.ChangedButton == MouseButton.Left) DragMove();
         }
+        private void HandleClose(object sender, RoutedEventArgs e) => Close();
     }
 }

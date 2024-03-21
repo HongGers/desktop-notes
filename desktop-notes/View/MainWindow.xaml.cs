@@ -80,6 +80,22 @@ namespace desktop_notes.View
             }
         }
 
+        private void HandleRemoveNoteClicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button activeBtn = (Button)sender;
+                StickyNote selectedNote = (StickyNote)activeBtn.Tag;
+
+                var viewModel = (MainWindowViewModel)DataContext;
+                viewModel.RemoveNote(selectedNote);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
         private void HandleShowWindow(object sender, RoutedEventArgs e)
         {
             Show();
@@ -87,7 +103,6 @@ namespace desktop_notes.View
         }
 
         private void HandleHideWindow(object sender, RoutedEventArgs e) => Hide();
-        #endregion
 
         private void HandleWindowClosed(object sender, EventArgs e)
         {
@@ -100,5 +115,6 @@ namespace desktop_notes.View
                 MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+        #endregion
     }
 }

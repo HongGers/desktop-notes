@@ -42,13 +42,21 @@
                       Background="Transparent" BorderThickness="0" VirtualizingPanel.ScrollUnit="Pixel">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <DockPanel>
-                            <Button DockPanel.Dock="Right" Content="open" Click="HandleOpenNoteClicked" Tag="{Binding}"/>
-                            <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
                                 <TextBlock Text="{Binding Title}" FontSize="{StaticResource NormalFontSize}"/>
                                 <TextBlock Text="{Binding TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"/>
                             </StackPanel>
-                        </DockPanel>
+                            <StackPanel Grid.Column="1" Orientation="Vertical">
+                                <Button DockPanel.Dock="Right" Content="open" Click="HandleOpenNoteClicked" Tag="{Binding}"/>
+                                <Button DockPanel.Dock="Right" Content="remove" Click="HandleRemoveNoteClicked" Tag="{Binding}"/>
+                            </StackPanel>
+                        </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

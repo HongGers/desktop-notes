@@ -37,6 +37,7 @@ namespace desktop_notes.ViewModel
 
             //initialize commands
             AddNoteCommand = new RelayCommand(AddNote, (noteToAdd) => noteToAdd is StickyNote);
+            RemoveNoteCommand = new RelayCommand(RemoveNote, (noteToRemove) => noteToRemove is StickyNote);
         }
         #endregion
 
@@ -80,6 +81,11 @@ namespace desktop_notes.ViewModel
         /// <para>* should call with a <see cref="StickyNote"/> pass in as CommandParameter</para>
         /// </summary>
         public ICommand AddNoteCommand { get; }
+        /// <summary>
+        /// Command to remove a <see cref="StickyNote"/> from MainWindow
+        /// <para>* should call with a <see cref="StickyNote"/> pass in as CommandParameter</para>
+        /// </summary>
+        public ICommand RemoveNoteCommand { get; }
         #endregion
 
 
@@ -96,6 +102,20 @@ namespace desktop_notes.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+        public void RemoveNote(object? param)
+        {
+            try
+            {
+                StickyNote? noteToRemove = param as StickyNote;
+                if (noteToRemove == null) throw new ArgumentException("RemoveNoteCommand should be called with a StickyNote passed in as parameter.");
+
+                StickyNotes.Remove(noteToRemove);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
