@@ -21,16 +21,22 @@ namespace desktop_notes.View
     /// </summary>
     public partial class NoteWindow : Window
     {
+        #region Constructor
         public NoteWindow()
         {
             InitializeComponent();
         }
+        #endregion
 
+
+        #region Handler
         private void HandleDrag(object sender, MouseButtonEventArgs e)
         {
             NoteWindowViewModel viewModel = (NoteWindowViewModel)DataContext;
             if (!viewModel.IsFixed && e.ChangedButton == MouseButton.Left) DragMove();
         }
+
         private void HandleClose(object sender, RoutedEventArgs e) => Close();
+        #endregion
     }
 }
