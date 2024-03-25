@@ -7,19 +7,22 @@
         xmlns:viewModel="clr-namespace:desktop_notes.ViewModel"
         xmlns:model="clr-namespace:desktop_notes.Model"
         xmlns:tb="http://www.hardcodet.net/taskbar" 
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
-        TextElement.FontFamily="{StaticResource FontFamily}"
-        TextElement.FontSize="{StaticResource NormalFontSize}"
+        Style="{StaticResource MaterialDesignWindow}"
         WindowStyle="None" AllowsTransparency="True" Background="Transparent"
         x:Name="MainWindowElement" ShowInTaskbar="False"
         Closed="HandleWindowClosed" ResizeMode="CanResizeWithGrip"
         MinWidth="300" MinHeight="300">
 
-    <Border BorderThickness="1" BorderBrush="Black" CornerRadius="5" MouseDown="HandleDrag">
+    <Border Margin="10" CornerRadius="8" MouseDown="HandleDrag">
         <Border.Background>
             <SolidColorBrush Color="White"/>
         </Border.Background>
+        <Border.Effect>
+            <DropShadowEffect ShadowDepth="0" Color="Gray" BlurRadius="8"/>
+        </Border.Effect>
 
         <Grid Background="Transparent">
             <Grid.RowDefinitions>
@@ -30,16 +33,38 @@
             <tb:TaskbarIcon x:Name="TrayIcon" ToolTipText="Desktop Note" IconSource="{StaticResource NoteIcon}"
                             TrayMouseDoubleClick="HandleShowWindow"/>
 
-            <Button Grid.Row="0" HorizontalAlignment="Right" Content="hide" DockPanel.Dock="Right" Click="HandleHideWindow"/>
-            <TextBlock Grid.Row="0" Text="{Binding Title}" FontSize="{StaticResource LargeFontSize}"
-                   HorizontalAlignment="Center" Margin="10" />
+            <!--top bar-->
+            <Border Grid.Row="0" CornerRadius="8 8 0 0">
+                <Border.Background>
+                    <SolidColorBrush Color="{StaticResource Yellow}"/>
+                </Border.Background>
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                        <Button Style="{DynamicResource MaterialDesignToolButton}" Click="HandleHideWindow" Margin="5 0">
+                            <materialDesign:PackIcon Kind="Minimize" Width="15" Height="15" 
+                                                 Foreground="Black" VerticalAlignment="Center"/>
+                        </Button>
+                        <Button Style="{DynamicResource MaterialDesignToolButton}" Click="HandleClose" Margin="5 0">
+                            <materialDesign:PackIcon Kind="Close" Width="15" Height="15" 
+                                                 Foreground="Black" VerticalAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Title}" Margin="10" FontWeight="SemiBold" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
 
+            <!--tool bar-->
             <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Button Content="add" Click="HandleAddClicked"/>
+                <Button Style="{DynamicResource MaterialDesignToolButton}" Click="HandleAddClicked" Margin="5 0">
+                    <materialDesign:PackIcon Kind="PlusCircleOutline" Width="{StaticResource ToolButtonSize}" Height="{StaticResource FloatingButtonSize}"
+                                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                </Button>
             </StackPanel>
 
+            <!--note list-->
             <ListView Grid.Row="2" x:Name="NotesList" ItemsSource="{Binding StickyNotes}" 
-                      Background="Transparent" BorderThickness="0" VirtualizingPanel.ScrollUnit="Pixel">
+                      Background="Transparent" BorderThickness="0" VirtualizingPanel.ScrollUnit="Pixel"
+                      HorizontalContentAlignment="Stretch">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -49,13 +74,23 @@
                             </Grid.ColumnDefinitions>
 
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="{Binding Note.Title}" FontSize="{StaticResource NormalFontSize}"/>
-                                <TextBlock Text="{Binding Note.TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"/>
+                                <TextBlock Text="{Binding Note.Title}" Style="{DynamicResource MaterialDesignBody1TextBlock}"/>
+                                <TextBlock Text="{Binding Note.TextContent}" Style="{DynamicResource MaterialDesignBody2TextBlock}" Foreground="Gray"/>
                             </StackPanel>
-                            <StackPanel Grid.Column="1" Orientation="Vertical">
-                                <Button Content="open" Click="HandleOpenNoteClicked" Tag="{Binding}"/>
-                                <Button Content="edit" Click="HandleEditNoteClicked" Tag="{Binding}"/>
-                                <Button Content="remove" Click="HandleRemoveNoteClicked" Tag="{Binding}"/>
+
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Button Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Width="{StaticResource FloatingButtonSize}" Height="{StaticResource FloatingButtonSize}" 
+                                        Click="HandleOpenNoteClicked" Tag="{Binding}" Margin="5 0">
+                                    <materialDesign:PackIcon Kind="OpenInNew" Width="{StaticResource FloatingButtonIconSize}" Height="{StaticResource FloatingButtonIconSize}"/>
+                                </Button>
+                                <Button Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Width="{StaticResource FloatingButtonSize}" Height="{StaticResource FloatingButtonSize}"
+                                        Click="HandleEditNoteClicked" Tag="{Binding}" Margin="5 0">
+                                    <materialDesign:PackIcon Kind="Edit" Width="{StaticResource FloatingButtonIconSize}" Height="{StaticResource FloatingButtonIconSize}"/>
+                                </Button>
+                                <Button Style="{DynamicResource MaterialDesignFloatingActionLightButton}" Width="{StaticResource FloatingButtonSize}" Height="{StaticResource FloatingButtonSize}"
+                                        Click="HandleRemoveNoteClicked" Tag="{Binding}" Margin="5 0">
+                                    <materialDesign:PackIcon Kind="Delete" Width="{StaticResource FloatingButtonIconSize}" Height="{StaticResource FloatingButtonIconSize}"/>
+                                </Button>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

@@ -37,6 +37,8 @@ namespace desktop_notes.View
             if (e.ChangedButton == MouseButton.Left) DragMove();
         }
 
+        private void HandleClose(object sender, RoutedEventArgs e) => Close();
+
         private void HandleAddClicked(object sender, RoutedEventArgs e)
         {
             try

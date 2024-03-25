@@ -2,11 +2,14 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:desktop_notes"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              Startup="OnStartUp">
 
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <materialDesign:BundledTheme BaseTheme="Light" PrimaryColor="Yellow" SecondaryColor="LightBlue"/>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesign3.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/desktop-notes;component/Style/StyleBase.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/desktop-notes;component/Style/ImageSources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
