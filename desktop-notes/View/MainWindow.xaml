@@ -53,8 +53,9 @@
                                 <TextBlock Text="{Binding Note.TextContent}" FontSize="{StaticResource SmallFontSize}" Foreground="Gray"/>
                             </StackPanel>
                             <StackPanel Grid.Column="1" Orientation="Vertical">
-                                <Button DockPanel.Dock="Right" Content="open" Click="HandleOpenNoteClicked" Tag="{Binding}"/>
-                                <Button DockPanel.Dock="Right" Content="remove" Click="HandleRemoveNoteClicked" Tag="{Binding}"/>
+                                <Button Content="open" Click="HandleOpenNoteClicked" Tag="{Binding}"/>
+                                <Button Content="edit" Click="HandleEditNoteClicked" Tag="{Binding}"/>
+                                <Button Content="remove" Click="HandleRemoveNoteClicked" Tag="{Binding}"/>
                             </StackPanel>
                         </Grid>
                     </DataTemplate>

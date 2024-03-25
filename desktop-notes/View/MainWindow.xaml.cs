@@ -41,11 +41,11 @@ namespace desktop_notes.View
         {
             try
             {
-                var addNoteDialog = new AddNoteWindow();
+                var addNoteDialog = new EditNoteWindow();
                 bool? dialogResult = addNoteDialog.ShowDialog();
                 if (dialogResult.HasValue && dialogResult.Value)
                 {
-                    AddNoteWindowViewModel vm = (AddNoteWindowViewModel)addNoteDialog.DataContext;
+                    EditNoteWindowViewModel vm = (EditNoteWindowViewModel)addNoteDialog.DataContext;
                     StickyNote addedNote = vm.Note;
 
                     MainWindowViewModel? mainWindowVM = this.DataContext as MainWindowViewModel;
@@ -77,6 +77,25 @@ namespace desktop_notes.View
                 selectedNoteItem.Window = noteWindow;
 
                 noteWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unhandled Exception", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void HandleEditNoteClicked(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Button activeBtn = (Button)sender;
+                NoteListItemViewModel selectedNoteItem = (NoteListItemViewModel)activeBtn.Tag;
+
+                var editDialog = new EditNoteWindow();
+                var editNoteWindowVM = new EditNoteWindowViewModel(selectedNoteItem.Note);
+                editDialog.DataContext = editNoteWindowVM;
+
+                editDialog.ShowDialog();
             }
             catch (Exception ex)
             {
