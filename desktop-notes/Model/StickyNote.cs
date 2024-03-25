@@ -10,7 +10,7 @@ namespace desktop_notes.Model
     /// <summary>
     /// Represent a StickyNote that can stick on screen
     /// </summary>
-    public class StickyNote
+    public class StickyNote : ModelBase
     {
         #region Constructor
         /// <summary>
@@ -43,15 +43,37 @@ namespace desktop_notes.Model
         #endregion
 
 
+        #region Field
+        string _title;
+        string _textContent;
+        #endregion
+
+
         #region Property
         /// <summary>
         /// Access Title of StickyNote
         /// </summary>
-        public string Title { get; set; }
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                OnPropertyChanged(nameof(Title));
+            }
+        }
         /// <summary>
         /// Access Content of StickyNote
         /// </summary>
-        public string TextContent { get; set; }
+        public string TextContent
+        {
+            get => _textContent;
+            set
+            {
+                _textContent = value;
+                OnPropertyChanged(nameof(TextContent));
+            }
+        }
         #endregion
     }
 }

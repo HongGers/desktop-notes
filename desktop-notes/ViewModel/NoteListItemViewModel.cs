@@ -17,12 +17,19 @@ namespace desktop_notes.ViewModel
         #region Constructor
         public NoteListItemViewModel()
         {
-
+            RegisterNoteChangedEvent();
         }
 
         public NoteListItemViewModel(StickyNote note)
         {
             _note = note;
+
+            RegisterNoteChangedEvent();
+        }
+
+        void RegisterNoteChangedEvent()
+        {
+            _note.PropertyChanged += (s, e) => OnPropertyChanged(nameof(Note));
         }
         #endregion
 
