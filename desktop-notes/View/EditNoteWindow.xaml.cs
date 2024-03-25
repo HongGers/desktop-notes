@@ -19,9 +19,9 @@ namespace desktop_notes.View
     /// <summary>
     /// Window to add a new <see cref="StickyNote"/>
     /// </summary>
-    public partial class AddNoteWindow : Window
+    public partial class EditNoteWindow : Window
     {
-        public AddNoteWindow()
+        public EditNoteWindow()
         {
             InitializeComponent();
         }

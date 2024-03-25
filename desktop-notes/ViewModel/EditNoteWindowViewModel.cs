@@ -12,17 +12,26 @@ using System.Windows.Input;
 namespace desktop_notes.ViewModel
 {
     /// <summary>
-    /// View Model for <see cref="AddNoteWindow"/>
+    /// View Model for <see cref="EditNoteWindow"/>
     /// </summary>
-    public class AddNoteWindowViewModel : ViewModelBase
+    public class EditNoteWindowViewModel : ViewModelBase
     {
         #region Constructor
         /// <summary>
         /// Default constructor of AddNoteWindowViewModel
         /// </summary>
-        public AddNoteWindowViewModel()
+        public EditNoteWindowViewModel()
         {
             _note = new StickyNote();
+        }
+
+        /// <summary>
+        /// Construct with an existing note.
+        /// </summary>
+        /// <param name="note"></param>
+        public EditNoteWindowViewModel(StickyNote note)
+        {
+            _note = note;
         }
         #endregion
 
