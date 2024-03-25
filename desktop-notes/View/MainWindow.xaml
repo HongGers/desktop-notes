@@ -27,7 +27,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <tb:TaskbarIcon x:Name="TrayIcon" ToolTipText="Hello World" IconSource="{StaticResource NoteIcon}"
+            <tb:TaskbarIcon x:Name="TrayIcon" ToolTipText="Desktop Note" IconSource="{StaticResource NoteIcon}"
                             TrayMouseDoubleClick="HandleShowWindow"/>
 
             <Button Grid.Row="0" HorizontalAlignment="Right" Content="hide" DockPanel.Dock="Right" Click="HandleHideWindow"/>
