@@ -21,13 +21,13 @@
         <Border.Background>
             <SolidColorBrush Color="{StaticResource Yellow}"/>
         </Border.Background>
-        <Grid Margin="20">
+        <Grid Margin="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
+            <Grid Grid.Column="0" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -39,17 +39,28 @@
                        Margin="0 5"/>
             </Grid>
 
-            <Grid Grid.Column="1" VerticalAlignment="Stretch" MinWidth="30" MinHeight="120">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <Grid Grid.Column="1">
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                    <Button Style="{DynamicResource MaterialDesignToolButton}" Click="HandleClose">
+                        <materialDesign:PackIcon Kind="Close" Width="{StaticResource ToolButtonSize}"/>
+                    </Button>
+                    <materialDesign:PopupBox Padding="0" StaysOpen="True" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <materialDesign:PopupBox.ToggleContent>
+                            <materialDesign:PackIcon Kind="DotsVertical"/>
+                        </materialDesign:PopupBox.ToggleContent>
 
-                <CheckBox Grid.Row="0" Command="{Binding ToggleFixedCommand}" />
-                <Button Grid.Row="1" Content="close" Margin="0 0 0 10" Click="HandleClose" />
-                <Slider Grid.Row="2" Orientation="Vertical" Value="{Binding Opacity,Mode=TwoWay}" Height="60"
-                        HorizontalAlignment="Center" Maximum="1" Minimum="0.2" DockPanel.Dock="Bottom" />
+                        <Border>
+                            <Border.Background>
+                                <SolidColorBrush Color="{StaticResource Yellow}"/>
+                            </Border.Background>
+
+                            <StackPanel Orientation="Vertical" Background="Transparent" Margin="5">
+                                <CheckBox Command="{Binding ToggleFixedCommand}" Content="Fixed" Margin="0 5"/>
+                                <Slider Minimum="0.2" Maximum="1" Value="{Binding Opacity}" Margin="0 5"/>
+                            </StackPanel>
+                        </Border>
+                    </materialDesign:PopupBox>
+                </StackPanel>
             </Grid>
         </Grid>
     </Border>
