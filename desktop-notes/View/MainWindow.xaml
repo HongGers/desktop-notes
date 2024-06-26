@@ -56,7 +56,7 @@
             <!--tool bar-->
             <StackPanel Grid.Row="1" Orientation="Horizontal">
                 <Button Style="{DynamicResource MaterialDesignToolButton}" Click="HandleAddClicked" Margin="5 0">
-                    <materialDesign:PackIcon Kind="PlusCircleOutline" Width="{StaticResource ToolButtonSize}" Height="{StaticResource FloatingButtonSize}"
+                    <materialDesign:PackIcon Kind="PlusCircleOutline" Width="{StaticResource ToolButtonSize}" Height="{StaticResource ToolButtonSize}"
                                              VerticalAlignment="Center" HorizontalAlignment="Center"/>
                 </Button>
             </StackPanel>
