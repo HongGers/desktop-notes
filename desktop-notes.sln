@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34003.232
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "desktop-notes", "desktop-notes\desktop-notes.csproj", "{744703D8-5C12-4546-9EF3-163572298C00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "desktop-notes", "desktop-notes\desktop-notes.csproj", "{744703D8-5C12-4546-9EF3-163572298C00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8BDDC0E0-63BC-4762-8D14-327C504012F9}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		screenshot.png = screenshot.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
